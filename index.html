@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COPA MUNDIAL FIFA 2026 - Inicio</title>
+    <style>
+        /* --- VARIABLES GLOBALES (MODO OSCURO POR DEFECTO) --- */
+        :root {
+            --fifa-bg: #0d1117;       
+            --fifa-card: #161b22;       
+            --fifa-blue: #001f54;       
+            --fifa-gold: #d4af37;       
+            --fifa-text: #ffffff;       
+            --fifa-text-muted: #8b949e; 
+            --fifa-accent: #0052cc;     
+            --fifa-border: rgba(255, 255, 255, 0.1);
+            --fifa-input-bg: #1f2631;
+            --icon-bg: #1f2631;
+            --icon-color: #d4af37;
+            --icon-border: rgba(255, 255, 255, 0.1);
+        }
+
+        /* --- VARIABLES MODO CLARO --- */
+        body.light-mode {
+            --fifa-bg: #f0f2f5;       
+            --fifa-card: #ffffff;       
+            --fifa-blue: #0c2340;       
+            --fifa-gold: #b38b1e;       
+            --fifa-text: #1a1a1a;       
+            --fifa-text-muted: #555555; 
+            --fifa-accent: #0052cc;     
+            --fifa-border: rgba(0, 0, 0, 0.1);
+            --fifa-input-bg: #e4e6eb;
+            --icon-bg: #ffffff;
+            --icon-color: #0052cc;
+            --icon-border: rgba(0, 82, 204, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial Black', -apple-system, BlinkMacSystemFont, sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        body {
+            background-color: var(--fifa-bg);
+            color: var(--fifa-text);
+            padding: 0 10px 20px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        header {
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            padding: 20px 10px 15px;
+            border-bottom: 3px solid var(--fifa-gold);
+            margin-bottom: 30px;
+            position: sticky;
+            top: 0;
+            background-color: var(--fifa-bg);
+            z-index: 50;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 1.5rem; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        header h1 span {
+            color: var(--fifa-gold);
+        }
+
+        /* --- BOTON TEMA (ESQUINA SUPERIOR) --- */
+        .theme-icon-btn {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--fifa-input-bg);
+            border: 1px solid var(--fifa-border);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            z-index: 60;
+        }
+
+        .theme-icon-btn:hover {
+            border-color: var(--fifa-gold);
+            transform: translateY(-50%) scale(1.05);
+        }
+
+        /* --- CONTENEDOR PRINCIPAL --- */
+        .main-menu {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 0 10px;
+        }
+
+        .welcome-text {
+            text-align: center;
+            font-family: -apple-system, sans-serif;
+            color: var(--fifa-text-muted);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+
+        /* --- TARJETAS TIPO BOTÓN --- */
+        .menu-card {
+            background: var(--fifa-card);
+            border-left: 6px solid var(--fifa-accent);
+            border-radius: 12px;
+            padding: 25px 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-left-color 0.3s ease;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            border-left-color: var(--fifa-gold);
+        }
+
+        .menu-card.results-card {
+            border-left-color: var(--fifa-gold);
+        }
+
+        .menu-card.results-card:hover {
+            border-left-color: #00ffcc; /* Un toque cyberg-futurista en el hover */
+        }
+        
+        body.light-mode .menu-card.results-card:hover {
+            border-left-color: var(--fifa-blue);
+        }
+
+        .icon-container {
+            background-color: var(--icon-bg);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            border: 1px solid var(--icon-border);
+            color: var(--icon-color);
+            transition: all 0.3s ease;
+        }
+
+        .menu-info {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .menu-info h2 {
+            color: var(--fifa-text);
+            font-size: 1.3rem;
+            text-transform: uppercase;
+        }
+
+        .menu-info p {
+            font-family: -apple-system, sans-serif;
+            color: var(--fifa-text-muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .footer-note {
+            margin-top: auto;
+            padding-top: 40px;
+            font-family: -apple-system, sans-serif;
+            font-size: 0.8rem;
+            color: var(--fifa-text-muted);
+            text-align: center;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <button id="theme-btn" class="theme-icon-btn" title="Cambiar tema">☀️</button>
+        <h1>COPA MUNDIAL FIFA <span>2026</span></h1>
+    </header>
+
+    <div class="main-menu">
+        <p class="welcome-text">
+            Bienvenido al centro de mando. Prepara tus predicciones antes de que Skynet tome el control de los resultados.
+        </p>
+
+        <!-- ENLACE A LA PÁGINA PARA LLENAR QUINIELA -->
+        <a href="quiniela.html" class="menu-card">
+            <div class="icon-container">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 20h9"></path>
+                    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                </svg>
+            </div>
+            <div class="menu-info">
+                <h2>Llenar Quiniela</h2>
+                <p>Arma tus pronósticos, pon a prueba tu suerte y descarga tu archivo JSON.</p>
+            </div>
+        </a>
+
+        <!-- ENLACE A LA PÁGINA PARA VER RESULTADOS (MUNDIAL QUINIELA) -->
+        <a href="mundial_quiniela.html" class="menu-card results-card">
+            <div class="icon-container">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                    <path d="M4 22h16"></path>
+                    <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+                    <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
+                    <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+                </svg>
+            </div>
+            <div class="menu-info">
+                <h2>Ver Resultados</h2>
+                <p>Carga tu quiniela y compárala en tiempo real contra los marcadores oficiales de la FIFA.</p>
+            </div>
+        </a>
+    </div>
+
+    <div class="footer-note">
+        Desarrollado por ALSE Technology © 2026
+    </div>
+
+    <script>
+        // Lógica simple para mantener el modo oscuro/claro sincronizado
+        const themeBtn = document.getElementById('theme-btn');
+        
+        // Revisar si ya habían escogido un tema en otra pestaña/página (opcional, pero buena práctica)
+        const currentTheme = localStorage.getItem('fifa_theme');
+        if (currentTheme === 'light') {
+            document.body.classList.add('light-mode');
+            themeBtn.innerText = "🌙";
+        }
+
+        themeBtn.addEventListener('click', function() {
+            const isLight = document.body.classList.toggle('light-mode');
+            themeBtn.innerText = isLight ? "🌙" : "☀️";
+            
+            // Guardar preferencia para que al navegar no te cambie la luz de golpe
+            localStorage.setItem('fifa_theme', isLight ? 'light' : 'dark');
+        });
+    </script>
+</body>
+</html>
